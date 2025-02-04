@@ -5,11 +5,11 @@
 
 class JsonSerializer : public Serializer {
 public:
-	JsonSerializer();
+	void Initialize(void* document) override;
+	void Start() override;
+	void End(const char* name) override;
+	void AddToArray(const char* name) override;
 
-	void Start(void* document) override;
-	void StartClass() override;
-	void EndClass(const char* name) override;
 	void SerializeField(const char* name, const std::string& value) override;
 	void SerializeField(const char* name, const int& value) override;
 

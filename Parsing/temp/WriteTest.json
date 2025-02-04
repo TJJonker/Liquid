@@ -1,6 +1,12 @@
 {
-    "ExampleClass": {
-        "something": 15,
-        "foo": "Bar"
-    }
+    "classes": [
+        {
+            "something": 15,
+            "foo": "Bar"
+        },
+        {
+            "something": 15,
+            "foo": "Bar"
+        }
+    ]
 }

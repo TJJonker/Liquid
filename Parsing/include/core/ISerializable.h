@@ -5,23 +5,19 @@
 #define SERIALIZE(field) \
 	serializer->SerializeField(StringUtils::StripStringStarting(#field, "_").c_str(), field);
 
-template<typename Derived>
-class ISerializable {
-public:
-	std::string GetClassName() 
-	{ 
-		return StringUtils::StripStringStarting(typeid(Derived).name(), "class ");
-	}
+#define SERIALIZECLASS(field) \
+	serializer->Start(); \
+	field.Serialize(serializer); \
+	serializer->End(#field);
+
+#define SERIALIZECLASSARRAY(field, size) \
+	for(int i = 0; i < size; i++) {\
+		serializer->Start(); \
+		field[i].Serialize(serializer); \
+		serializer->AddToArray(#field); }
 	
 
-	void SerializeClass(Serializer* serializer) 
-	{ 
-		serializer->StartClass();
-		Serialize(serializer);
-		serializer->EndClass(GetClassName().c_str());
-	}
-
-protected:
+class ISerializable {
+public:
 	virtual void Serialize(Serializer* serializer) = 0;
-
 };

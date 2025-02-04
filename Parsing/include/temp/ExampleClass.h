@@ -1,9 +1,10 @@
 #pragma once
 #include "core/ISerializable.h"
+#include "temp/NestedClass.h"
 
-class ExampleClass : public ISerializable<ExampleClass>
+class ExampleClass : public ISerializable
 {
-protected:
+public:
 	void Serialize(Serializer* serializer) override {
 		SERIALIZE(_something);
 		SERIALIZE(_foo);
@@ -12,5 +13,7 @@ protected:
 private:
 	int _something = 15;
 	std::string _foo = "Bar";
+	NestedClass _nestedClass;
+	NestedClass _anotherNestedClass;
 };
 

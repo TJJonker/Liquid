@@ -7,11 +7,26 @@
     <Filter Include="include\core">
       <UniqueIdentifier>{A17DD969-8DE0-680E-3666-A1C422A83491}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\parsers">
+      <UniqueIdentifier>{18ED32D4-8478-A098-8D89-238DF993FC98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\serializers">
+      <UniqueIdentifier>{C593E982-31F5-C690-BA62-0D4326C3FD4F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\temp">
+      <UniqueIdentifier>{EEA4E269-DA07-720E-838D-AAC46FCF3D91}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\core">
       <UniqueIdentifier>{C55F2ECF-B12C-89DA-DA45-7782C671BE68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\parsers">
+      <UniqueIdentifier>{BC4C08A5-2802-819A-B1F6-7A711DAB779E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\serializers">
+      <UniqueIdentifier>{6925EE78-D5B0-5B3D-DEC1-DE314ACCB73D}</UniqueIdentifier>
     </Filter>
     <Filter Include="temp">
       <UniqueIdentifier>{9B679E7C-879E-9F0D-308B-85101CA11B0F}</UniqueIdentifier>
@@ -27,16 +42,33 @@
     <ClInclude Include="include\core\IParser.h">
       <Filter>include\core</Filter>
     </ClInclude>
+    <ClInclude Include="include\core\ISerializable.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\Serializer.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\StringUtils.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\parsers\Parser_1.h">
+      <Filter>include\parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\parsers\Parser_2.h">
+      <Filter>include\parsers</Filter>
+    </ClInclude>
     <ClInclude Include="include\pch.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\parsers\Parser_2.h" />
-    <ClInclude Include="include\parsers\Parser_1.h" />
-    <ClInclude Include="include\core\Serializer.h" />
-    <ClInclude Include="include\serializers\JSONSerializer.h" />
-    <ClInclude Include="include\temp\ExampleClass.h" />
-    <ClInclude Include="include\core\ISerializable.h" />
-    <ClInclude Include="include\core\StringUtils.h" />
+    <ClInclude Include="include\serializers\JSONSerializer.h">
+      <Filter>include\serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\temp\ExampleClass.h">
+      <Filter>include\temp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\temp\NestedClass.h">
+      <Filter>include\temp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\FileUtils.cpp">
@@ -45,15 +77,29 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\parsers\Parser_1.cpp">
+      <Filter>src\parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parsers\Parser_2.cpp">
+      <Filter>src\parsers</Filter>
+    </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\parsers\Parser_2.cpp" />
-    <ClCompile Include="src\parsers\Parser_1.cpp" />
-    <ClCompile Include="src\serializers\JSONSerializer.cpp" />
-    <ClCompile Include="temp\ExampleClass.cpp" />
+    <ClCompile Include="src\serializers\JSONSerializer.cpp">
+      <Filter>src\serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\ExampleClass.cpp">
+      <Filter>temp</Filter>
+    </ClCompile>
+    <ClCompile Include="temp\NestedClass.cpp">
+      <Filter>temp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="temp\WriteTest.json">
+      <Filter>temp</Filter>
+    </None>
     <None Include="temp\example.json">
       <Filter>temp</Filter>
     </None>
