@@ -4,13 +4,13 @@
 #include "serializers/JSONSerializer.h"
 
 int main() {
-	ExampleClass classes[2];
+	ExampleClass exampleClass[2];
 
 	nlohmann::ordered_json document;
 	Serializer* serializer = new JsonSerializer();
 	serializer->Initialize(&document);
 
-	SERIALIZECLASSARRAY(classes, 2);
+	SERIALIZECLASSARRAY(exampleClass, 2);
 
 	FileUtils::Write("temp/WriteTest.json", document.dump(4).c_str());
 }

@@ -21,4 +21,5 @@ private:
 	nlohmann::ordered_json* _document;
 	std::stack<nlohmann::ordered_json*> _classStack;
 	int _indentLevel;
+
 };

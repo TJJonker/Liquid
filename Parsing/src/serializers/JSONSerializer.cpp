@@ -55,3 +55,4 @@ void JsonSerializer::DecreaseIndent()
 {
 	_indentLevel--;
 }
+

@@ -2,7 +2,7 @@
 #include "core/ISerializable.h"
 
 class NestedClass : public ISerializable {
-protected:
+public:
 	void Serialize(Serializer* serializer) override {
 		SERIALIZE(_nestedInteger);
 		SERIALIZE(_nestedString);
