@@ -1,3 +1,6 @@
 {
-    "something": 15
+    "class ExampleClass": {
+        "something": 15,
+        "foo": "Bar"
+    }
 }

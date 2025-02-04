@@ -10,7 +10,7 @@ int main() {
 	Serializer* serializer = new JsonSerializer();
 	serializer->Start(&document);
 
-	exampleClass.Serialize(serializer);
+	exampleClass.SerializeClass(serializer);
 
 	FileUtils::Write("temp/WriteTest.json", document.dump(4).c_str());
 }

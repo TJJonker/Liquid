@@ -4,4 +4,5 @@
 void ExampleClass::Serialize(Serializer* serializer)
 {
 	SERIALIZE(_something);
+	SERIALIZE(_foo);
 }

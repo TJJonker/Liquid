@@ -1,13 +1,12 @@
 #pragma once
 #include "core/ISerializable.h"
 
-template<typename Derived>
-class ExampleClass : public ISerializable
+class ExampleClass : public ISerializable<ExampleClass>
 {
-public:
-	std::string GetClassName
+protected:
 	void Serialize(Serializer* serializer) override;
 
 private:
 	int _something = 15;
+	std::string _foo = "Bar";
 };
