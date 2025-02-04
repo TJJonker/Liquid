@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{89AF369E-F58E-B539-FEA6-40106A051C9B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\core">
+      <UniqueIdentifier>{A17DD969-8DE0-680E-3666-A1C422A83491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{C55F2ECF-B12C-89DA-DA45-7782C671BE68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="temp">
+      <UniqueIdentifier>{9B679E7C-879E-9F0D-308B-85101CA11B0F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\core\Document.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\FileUtils.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\IParser.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pch.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\parsers\Parser_2.h" />
+    <ClInclude Include="include\parsers\Parser_1.h" />
+    <ClInclude Include="include\core\Serializer.h" />
+    <ClInclude Include="include\serializers\JSONSerializer.h" />
+    <ClInclude Include="include\temp\ExampleClass.h" />
+    <ClInclude Include="include\core\ISerializable.h" />
+    <ClInclude Include="include\core\StringUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\core\FileUtils.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parsers\Parser_2.cpp" />
+    <ClCompile Include="src\parsers\Parser_1.cpp" />
+    <ClCompile Include="src\serializers\JSONSerializer.cpp" />
+    <ClCompile Include="temp\ExampleClass.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="temp\example.json">
+      <Filter>temp</Filter>
+    </None>
+  </ItemGroup>
+</Project>
