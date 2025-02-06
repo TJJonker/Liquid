@@ -16,3 +16,4 @@ includeDirs["NLOHMANN"] = "vendor/NLOHMANN/single_include"
 libraryDirs = {}
 
 include "Parsing"
+include "Traits"
