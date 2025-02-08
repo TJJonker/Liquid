@@ -7,10 +7,19 @@
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Examples">
+      <UniqueIdentifier>{5B3F7059-47A2-FFFD-F027-38B4DC69CB80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\pch.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Examples\has_string.hpp">
+      <Filter>src\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Examples\is_int.hpp">
+      <Filter>src\Examples</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

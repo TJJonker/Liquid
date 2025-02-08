@@ -11,6 +11,7 @@ project "Traits"
 	files {
 		"include/**.h",
 		"src/**.cpp",
+		"src/**.hpp",
 		"temp/**"
 	}
 
