@@ -21,6 +21,9 @@
     <ClInclude Include="src\Examples\is_int.hpp">
       <Filter>src\Examples</Filter>
     </ClInclude>
+    <ClInclude Include="src\Examples\Enable_if.hpp">
+      <Filter>src\Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
