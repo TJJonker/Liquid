@@ -27,6 +27,9 @@
     <ClInclude Include="src\Examples\is_pointer.hpp">
       <Filter>src\Examples</Filter>
     </ClInclude>
+    <ClInclude Include="src\Examples\remove_pointer.hpp">
+      <Filter>src\Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
