@@ -97,6 +97,7 @@
     <ClInclude Include="src\Examples\Enable_if.hpp" />
     <ClInclude Include="src\Examples\has_string.hpp" />
     <ClInclude Include="src\Examples\is_int.hpp" />
+    <ClInclude Include="src\Examples\is_pointer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
