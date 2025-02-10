@@ -1,4 +1,4 @@
-project "Parsing"
+project "traits"
 	kind "ConsoleApp"
 	language "C++"
 
@@ -11,12 +11,12 @@ project "Parsing"
 	files {
 		"include/**.h",
 		"src/**.cpp",
+		"src/**.hpp",
 		"temp/**"
 	}
 
 	includedirs {
 		"include",
-		solutionDir .. "%{includeDirs.NLOHMANN}",
 	}
 
 	filter "system:windows"

@@ -15,22 +15,22 @@
     <ClInclude Include="include\pch.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="src\Examples\Enable_if.hpp">
+      <Filter>src\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Examples\factorial.hpp">
+      <Filter>src\Examples</Filter>
+    </ClInclude>
     <ClInclude Include="src\Examples\has_string.hpp">
       <Filter>src\Examples</Filter>
     </ClInclude>
     <ClInclude Include="src\Examples\is_int.hpp">
       <Filter>src\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="src\Examples\Enable_if.hpp">
-      <Filter>src\Examples</Filter>
-    </ClInclude>
     <ClInclude Include="src\Examples\is_pointer.hpp">
       <Filter>src\Examples</Filter>
     </ClInclude>
     <ClInclude Include="src\Examples\remove_pointer.hpp">
-      <Filter>src\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Examples\factorial.hpp">
       <Filter>src\Examples</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 workspace "TestEnvironment"
 	architecture "x64"
-	startproject "Parsing" 
+	startproject "parsing_traits" 
 
 	configurations {
 		"Debug",
@@ -15,5 +15,6 @@ includeDirs["NLOHMANN"] = "vendor/NLOHMANN/single_include"
 
 libraryDirs = {}
 
-include "Parsing"
-include "Traits"
+include "parsing/interface"
+include "parsing/traits"
+include "tests/traits"

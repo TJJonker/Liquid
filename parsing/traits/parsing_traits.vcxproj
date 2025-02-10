@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{DC4116D4-C8E3-40AA-B19E-54FE9DDFC7FA}</ProjectGuid>
+    <ProjectGuid>{CF638A2C-BB31-7E32-A4C5-EE5890325A97}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Traits</RootNamespace>
+    <RootNamespace>parsing_traits</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -42,16 +42,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\bin\Debug-windows-x86_64\Traits\</OutDir>
-    <IntDir>..\bin-int\Debug-windows-x86_64\Traits\</IntDir>
-    <TargetName>Traits</TargetName>
+    <OutDir>..\..\bin\Debug-windows-x86_64\parsing_traits\</OutDir>
+    <IntDir>..\..\bin-int\Debug-windows-x86_64\parsing_traits\</IntDir>
+    <TargetName>parsing_traits</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Release-windows-x86_64\Traits\</OutDir>
-    <IntDir>..\bin-int\Release-windows-x86_64\Traits\</IntDir>
-    <TargetName>Traits</TargetName>
+    <OutDir>..\..\bin\Release-windows-x86_64\parsing_traits\</OutDir>
+    <IntDir>..\..\bin-int\Release-windows-x86_64\parsing_traits\</IntDir>
+    <TargetName>parsing_traits</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -59,7 +59,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;..\..\vendor\NLOHMANN\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -76,7 +76,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;..\..\vendor\NLOHMANN\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -93,19 +93,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\core\Document.h" />
+    <ClInclude Include="include\core\FileUtils.h" />
+    <ClInclude Include="include\core\IParser.h" />
+    <ClInclude Include="include\core\ISerializable.h" />
+    <ClInclude Include="include\core\Serializer.h" />
+    <ClInclude Include="include\core\StringUtils.h" />
+    <ClInclude Include="include\parsers\Parser_1.h" />
+    <ClInclude Include="include\parsers\Parser_2.h" />
     <ClInclude Include="include\pch.h" />
-    <ClInclude Include="src\Examples\Enable_if.hpp" />
-    <ClInclude Include="src\Examples\factorial.hpp" />
-    <ClInclude Include="src\Examples\has_string.hpp" />
-    <ClInclude Include="src\Examples\is_int.hpp" />
-    <ClInclude Include="src\Examples\is_pointer.hpp" />
-    <ClInclude Include="src\Examples\remove_pointer.hpp" />
+    <ClInclude Include="include\serializers\JSONSerializer.h" />
+    <ClInclude Include="include\temp\ExampleClass.h" />
+    <ClInclude Include="include\temp\NestedClass.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\FileUtils.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\parsers\Parser_1.cpp" />
+    <ClCompile Include="src\parsers\Parser_2.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\serializers\JSONSerializer.cpp" />
+    <ClCompile Include="temp\ExampleClass.cpp" />
+    <ClCompile Include="temp\NestedClass.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="temp\WriteTest.json" />
+    <None Include="temp\example.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
