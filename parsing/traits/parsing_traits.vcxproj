@@ -96,6 +96,8 @@
     <ClInclude Include="include\core\FileUtils.h" />
     <ClInclude Include="include\core\StringUtils.h" />
     <ClInclude Include="include\pch.h" />
+    <ClInclude Include="include\temp\ExampleClass.h" />
+    <ClInclude Include="include\traits.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\FileUtils.cpp" />

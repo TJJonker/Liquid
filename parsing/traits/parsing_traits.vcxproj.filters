@@ -42,6 +42,8 @@
     <ClInclude Include="include\pch.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\temp\ExampleClass.h" />
+    <ClInclude Include="include\traits.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\FileUtils.cpp">
