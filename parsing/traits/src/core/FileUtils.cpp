@@ -41,14 +41,3 @@ bool FileUtils::Write(const char* filePath, const char* data)
 		return false;
 	}
 }
-
-bool FileUtils::FileToDocument(const char* filePath, Document* document)
-{
-	std::string data;
-	if (!Read(filePath, data))
-		return false;
-
-	nlohmann::ordered_json jsonDoc = nlohmann::json::parse(data);
-	document->Version = jsonDoc["Version"];
-	return true;
-}

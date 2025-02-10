@@ -93,33 +93,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\core\Document.h" />
     <ClInclude Include="include\core\FileUtils.h" />
-    <ClInclude Include="include\core\IParser.h" />
-    <ClInclude Include="include\core\ISerializable.h" />
-    <ClInclude Include="include\core\Serializer.h" />
     <ClInclude Include="include\core\StringUtils.h" />
-    <ClInclude Include="include\parsers\Parser_1.h" />
-    <ClInclude Include="include\parsers\Parser_2.h" />
     <ClInclude Include="include\pch.h" />
-    <ClInclude Include="include\serializers\JSONSerializer.h" />
-    <ClInclude Include="include\temp\ExampleClass.h" />
-    <ClInclude Include="include\temp\NestedClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\FileUtils.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\parsers\Parser_1.cpp" />
-    <ClCompile Include="src\parsers\Parser_2.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\serializers\JSONSerializer.cpp" />
-    <ClCompile Include="temp\ExampleClass.cpp" />
-    <ClCompile Include="temp\NestedClass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="temp\WriteTest.json" />
     <None Include="temp\example.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

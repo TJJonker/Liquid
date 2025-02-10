@@ -33,41 +33,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\core\Document.h">
-      <Filter>include\core</Filter>
-    </ClInclude>
     <ClInclude Include="include\core\FileUtils.h">
-      <Filter>include\core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\core\IParser.h">
-      <Filter>include\core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\core\ISerializable.h">
-      <Filter>include\core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\core\Serializer.h">
       <Filter>include\core</Filter>
     </ClInclude>
     <ClInclude Include="include\core\StringUtils.h">
       <Filter>include\core</Filter>
     </ClInclude>
-    <ClInclude Include="include\parsers\Parser_1.h">
-      <Filter>include\parsers</Filter>
-    </ClInclude>
-    <ClInclude Include="include\parsers\Parser_2.h">
-      <Filter>include\parsers</Filter>
-    </ClInclude>
     <ClInclude Include="include\pch.h">
       <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\serializers\JSONSerializer.h">
-      <Filter>include\serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="include\temp\ExampleClass.h">
-      <Filter>include\temp</Filter>
-    </ClInclude>
-    <ClInclude Include="include\temp\NestedClass.h">
-      <Filter>include\temp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -77,29 +50,11 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\parsers\Parser_1.cpp">
-      <Filter>src\parsers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\parsers\Parser_2.cpp">
-      <Filter>src\parsers</Filter>
-    </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\serializers\JSONSerializer.cpp">
-      <Filter>src\serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="temp\ExampleClass.cpp">
-      <Filter>temp</Filter>
-    </ClCompile>
-    <ClCompile Include="temp\NestedClass.cpp">
-      <Filter>temp</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="temp\WriteTest.json">
-      <Filter>temp</Filter>
-    </None>
     <None Include="temp\example.json">
       <Filter>temp</Filter>
     </None>
