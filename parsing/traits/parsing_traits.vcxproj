@@ -95,7 +95,6 @@
   <ItemGroup>
     <ClInclude Include="include\archives\archive.hpp" />
     <ClInclude Include="include\archives\JSONArchive.hpp" />
-    <ClInclude Include="include\core\FileUtils.h" />
     <ClInclude Include="include\core\StringUtils.h" />
     <ClInclude Include="include\liquid.hpp" />
     <ClInclude Include="include\macros.h" />
@@ -105,7 +104,6 @@
     <ClInclude Include="include\traits.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\core\FileUtils.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

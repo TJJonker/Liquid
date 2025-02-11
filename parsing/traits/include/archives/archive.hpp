@@ -11,23 +11,21 @@ public:
 	virtual ~OutputArchive() = default;
 
 	template<class ... Types> inline
-		ArchiveType& operator()(Types && ... args) {
+		void operator()(Types && ... args) {
 		(Process(std::forward<Types>(args)), ...);
-		return *_self;
 	}
 	
 	// Default implementation for raw values.
 	template<typename T>
-	ArchiveType& Process(T&& arg) {
+	void Process(T&& arg) {
 		_self->ProcessImpl(std::forward<T>(arg));
-		return *_self;
 	}
 
 	// Default implementation for nvp values.
 	// I.E. Binary won't need nvps, so nvps are only implemented if overwritten in archives.
 	template<typename T>
-	ArchiveType& Process(NVP<T>&& nvp) {
-		Process(std::forward<T>(nvp.value));
+	void Process(NVP<T>&& nvp) {
+		_self->ProcessImpl(std::forward<NVP<T>>(nvp));
 	}
 	
 

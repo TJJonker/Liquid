@@ -33,9 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\core\FileUtils.h">
-      <Filter>include\core</Filter>
-    </ClInclude>
     <ClInclude Include="include\core\StringUtils.h">
       <Filter>include\core</Filter>
     </ClInclude>
@@ -53,9 +50,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\core\FileUtils.cpp">
-      <Filter>src\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
