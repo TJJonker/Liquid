@@ -44,6 +44,13 @@
     </ClInclude>
     <ClInclude Include="include\temp\ExampleClass.h" />
     <ClInclude Include="include\traits.h" />
+    <ClInclude Include="include\archives\archive.hpp" />
+    <ClInclude Include="include\archives\JSONArchive.hpp" />
+    <ClInclude Include="include\macros.h" />
+    <ClInclude Include="include\structs.h" />
+    <ClInclude Include="include\liquid.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\FileUtils.cpp">
@@ -60,5 +67,6 @@
     <None Include="temp\example.json">
       <Filter>temp</Filter>
     </None>
+    <None Include="temp\JSONTest.json" />
   </ItemGroup>
 </Project>

@@ -1,10 +1,17 @@
 #pragma once
+#include <iostream>
 
 class ExampleClass {
 public:
 
 	template<typename Archive>
-	void Serialize(Archive& t) {
-		std::cout << "Something cool happened!" << std::endl;
+	void Serialize(Archive& archive) {
+		archive(_meaningOfLife);
 	}
+
+private:
+	int _meaningOfLife = 42;
+	std::string _description = "Meaning of life";
 };
+
+class ExampleClass2 { };

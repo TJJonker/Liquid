@@ -93,9 +93,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\archives\archive.hpp" />
+    <ClInclude Include="include\archives\JSONArchive.hpp" />
     <ClInclude Include="include\core\FileUtils.h" />
     <ClInclude Include="include\core\StringUtils.h" />
+    <ClInclude Include="include\liquid.hpp" />
+    <ClInclude Include="include\macros.h" />
     <ClInclude Include="include\pch.h" />
+    <ClInclude Include="include\structs.h" />
     <ClInclude Include="include\temp\ExampleClass.h" />
     <ClInclude Include="include\traits.h" />
   </ItemGroup>
@@ -108,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="temp\example.json" />
+    <None Include="temp\JSONTest.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

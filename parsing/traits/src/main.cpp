@@ -1,9 +1,11 @@
 #include "pch.h"
-#include "core/FileUtils.h"
-#include "traits.h"
-#include "temp/ExampleClass.h"
+#include "liquid.hpp"
+#include "archives/JSONArchive.hpp"
+
+int s1, s2, s3;
 
 int main() {
-	std::cout << std::boolalpha;
-	std::cout << is_serializable<ExampleClass>::value << std::endl;
+	JSONOutputArchive archive;
+
+	archive(Liquid_NVP(s1));
 }

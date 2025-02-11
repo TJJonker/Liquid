@@ -98,6 +98,7 @@
     <ClInclude Include="src\Examples\factorial.hpp" />
     <ClInclude Include="src\Examples\has_string.hpp" />
     <ClInclude Include="src\Examples\is_int.hpp" />
+    <ClInclude Include="src\Examples\is_iterable.hpp" />
     <ClInclude Include="src\Examples\is_pointer.hpp" />
     <ClInclude Include="src\Examples\remove_pointer.hpp" />
   </ItemGroup>
