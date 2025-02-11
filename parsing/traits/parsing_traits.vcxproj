@@ -110,8 +110,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="temp\example.json" />
-    <None Include="temp\JSONTest.json" />
+    <None Include="temp\out.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

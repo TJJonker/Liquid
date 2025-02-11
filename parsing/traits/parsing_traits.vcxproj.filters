@@ -58,9 +58,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="temp\example.json">
-      <Filter>temp</Filter>
-    </None>
-    <None Include="temp\JSONTest.json" />
+    <None Include="temp\out.json" />
   </ItemGroup>
 </Project>

@@ -2,14 +2,15 @@
 #include "liquid.hpp"
 #include "archives/JSONArchive.hpp"
 
-int s1, s2, s3 = 0;
+int vars[5] = { 1, 2, 3, 4, 5 };
 
 
 int main() {
 	std::ofstream os("temp/out.json");
 	{
 		JSONOutputArchive archive (os);
-		archive(Liquid_NVP(s1), Liquid_NVP(s2), Liquid_NVP(s3));
+		archive(Liquid::Create_nvp("array", Liquid::Create_array(vars, 5)));
+		archive(vars);
 	}
 	os.close();
 }
