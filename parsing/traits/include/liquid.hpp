@@ -8,8 +8,8 @@ public:
 		return { name, value };
 	}
 
-	template<class T>
-	static inline ArrayRef<T> Create_array(T* pointer, size_t size) {
-		return { pointer, size };
+	template<typename T, size_t N>
+	static inline ArrayRef<T> Create_array(T(&ar)[N]) {
+		return { ar, N };
 	}
 };

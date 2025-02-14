@@ -14,7 +14,7 @@ struct StackContext {
 	nlohmann::ordered_json document;
 	const char* name;
 
-	StackContext(Context context) : context(context), unnamedIndex(0) { }
+	StackContext(Context context) : context(context), unnamedIndex(0), name(nullptr) { }
 
 	std::string GetNextName() {
 		if (name != nullptr) {
@@ -59,7 +59,17 @@ public:
 	void EndArray() {
 		StackContext context = TopStack();
 		_contextStack.pop();
-		TopStack().document[TopStack().GetNextName()] = context.document;
+		ProcessImpl(context.document);
+	}
+
+	void StartObject() {
+		_contextStack.push(StackContext::Context::Object);
+	}
+
+	void EndObject() {
+		StackContext context = TopStack();
+		_contextStack.pop();
+		ProcessImpl(context.document);
 	}
 
 private:
@@ -73,6 +83,8 @@ private:
 };
 
 
+// =======================================
+
 template<typename T>
 void Prologue(JSONOutputArchive& a, ArrayRef<T>&& ar) {
 	std::cout << "Prologueing Array" << std::endl;
@@ -85,8 +97,41 @@ void Epilogue(JSONOutputArchive& a, ArrayRef<T>&& ar) {
 	a.EndArray();
 }
 
+// =======================================
+
 template<typename T>
 void Prologue(JSONOutputArchive& a, NVP<T>&& nvp) {
 	std::cout << "Prologueing NVP" << std::endl;
 	a.SetNextName(nvp.name);
+}
+
+template<typename T>
+void Epilogue(JSONOutputArchive& a, NVP<T>&& nvp) {
+	std::cout << "Epilogueing NVP" << std::endl;
+}
+
+// =======================================
+
+template<typename T, typename std::enable_if_t<!is_serializable_v<T>, int> = 0>
+void Prologue(JSONOutputArchive& a, T const&) {
+	std::cout << "Prologueing Something" << std::endl;
+}
+
+template<typename T, typename std::enable_if_t<!is_serializable_v<T>, int> = 0>
+void Epilogue(JSONOutputArchive& a, T const&) {
+	std::cout << "Epilogueing Something" << std::endl;
+}
+
+// =======================================
+
+template<typename T, typename std::enable_if_t<is_serializable_v<T>, int> = 0>
+void Prologue(JSONOutputArchive& a, T const&) {
+	std::cout << "Prologueing Serializable" << std::endl;
+	a.StartObject();
+}
+
+template<typename T, typename std::enable_if_t<is_serializable_v<T>, int> = 0>
+void Epilogue(JSONOutputArchive& a, T const&) {
+	std::cout << "Epilogueing Serializable" << std::endl;
+	a.EndObject();
 }

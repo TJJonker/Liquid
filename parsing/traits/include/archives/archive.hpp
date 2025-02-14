@@ -23,10 +23,16 @@ private:
 		Epilogue(*_self, std::forward<T>(arg));
 	}
 
-	template<typename T>
+	template <typename T, typename std::enable_if_t<!is_serializable_v<T>, int> = 0>
 	void Process(T&& arg) {
 		std::cout << "Processing Default" << std::endl;
 		_self->ProcessImpl(std::forward<T>(arg));
+	}
+
+	template <typename T, typename std::enable_if_t<is_serializable_v<T>, int> = 0>
+	void Process(T&& arg) {
+		std::cout << "Processing Serializable" << std::endl;
+		arg.Serialize(*_self); 
 	}
 
 	template<typename T>
@@ -39,7 +45,7 @@ private:
 	void Process(ArrayRef<T>&& ar) {
 		std::cout << "Processing Array" << std::endl;
 		for (size_t i = 0; i < ar.size; ++i) {
-			Process(ar.pointer[i]);
+			Serialize(std::forward<T>(ar.pointer[i]));
 		}
 	}
 
@@ -53,4 +59,6 @@ void Prologue(Archive&, T const& something) {
 }
 
 template<class Archive, typename T>
-void Epilogue(Archive&, T const&) { }
+void Epilogue(Archive&, T const&) {
+	std::cout << "Epilogueing Nothing" << std::endl;
+}
