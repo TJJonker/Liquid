@@ -44,6 +44,8 @@ public:
 	void ProcessImpl(T&& data) {
 		if (TopStack().context == StackContext::Context::Array)
 			TopStack().document.push_back(data);
+		else
+			TopStack().document[TopStack().GetNextName()] = data;
 	}
 
 	void SetNextName(const char* name) {

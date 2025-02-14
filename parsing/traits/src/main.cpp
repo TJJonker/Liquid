@@ -11,7 +11,8 @@ int main() {
 		JSONOutputArchive archive (os);
 		archive(Liquid::Create_nvp("array", Liquid::Create_array(vars, 5)));
 		archive(Liquid::Create_array(vars, 5));
-		archive(vars[1]);
+		archive(Liquid::Create_nvp("x", vars[1]));
+		archive(Liquid::Create_nvp("y", vars[2]));
 	}
 	os.close();
 }
