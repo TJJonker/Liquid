@@ -42,9 +42,8 @@ public:
 
 	template<typename T>
 	void ProcessImpl(T&& data) {
-		int something = 0;
-		something++;
-		//TopStack().document[TopStack().GetNextName()] = data;
+		if (TopStack().context == StackContext::Context::Array)
+			TopStack().document.push_back(data);
 	}
 
 	void SetNextName(const char* name) {
@@ -56,9 +55,9 @@ public:
 	}
 
 	void EndArray() {
-		StackContext context = _contextStack.top().document;
+		StackContext context = TopStack();
 		_contextStack.pop();
-		TopStack().document["Random Name 2"] = context.document;
+		TopStack().document[TopStack().GetNextName()] = context.document;
 	}
 
 private:
@@ -76,6 +75,12 @@ template<typename T>
 void Prologue(JSONOutputArchive& a, ArrayRef<T>&& ar) {
 	std::cout << "Prologueing Array" << std::endl;
 	a.StartArray();
+}
+
+template<typename T>
+void Epilogue(JSONOutputArchive& a, ArrayRef<T>&& ar) {
+	std::cout << "Epilogueing Array" << std::endl;
+	a.EndArray();
 }
 
 template<typename T>
