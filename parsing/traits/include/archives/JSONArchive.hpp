@@ -83,6 +83,20 @@ private:
 };
 
 
+class JSONOutputArchive : public OutputArchive<JSONOutputArchive> {
+public:
+	JSONOutputArchive(std::istream& stream) :
+		OutputArchive<JSONOutputArchive>(this)
+	{
+		_contextStack.push(StackContext::Context::Object);
+		_contextStack.top().document = nlohmann::json::parse(stream);
+	};
+
+private:
+	std::stack<StackContext> _contextStack;
+};
+
+
 // =======================================
 
 template<typename T>

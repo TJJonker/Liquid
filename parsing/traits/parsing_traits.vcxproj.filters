@@ -57,7 +57,4 @@
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="temp\out.json" />
-  </ItemGroup>
 </Project>

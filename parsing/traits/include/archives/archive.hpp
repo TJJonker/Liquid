@@ -53,6 +53,35 @@ private:
 	ArchiveType* const _self;
 };
 
+template<class ArchiveType>
+class OutputArchive {
+public:
+	OutputArchive(ArchiveType* const derived) : _self(derived) { }
+	virtual ~OutputArchive() = default;
+
+	template<class ... Types> inline
+		void operator()(Types && ... args) {
+		(Deserialize(std::forward<Types>(args)), ...);
+	}
+
+private:
+	template<typename T>
+	void Serialize(T&& arg) {
+		Prologue(*_self, std::forward<T>(arg));
+		Process(std::forward<T>(arg));
+		Epilogue(*_self, std::forward<T>(arg));
+	}
+
+	template <typename T, typename std::enable_if_t<!is_serializable_v<T>, int> = 0>
+	void Process(T&& arg) {
+		std::cout << "Processing Default" << std::endl;
+		_self->ProcessImpl(std::forward<T>(arg));
+	}
+
+private:
+	ArchiveType* const _self;
+};
+
 template<class Archive, typename T>
 void Prologue(Archive&, T const& something) {
 	std::cout << "Prologueing Nothing" << std::endl;
