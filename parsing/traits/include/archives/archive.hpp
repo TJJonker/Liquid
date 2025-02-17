@@ -5,10 +5,10 @@
 #include "traits.h"
 
 template<class ArchiveType>
-class OutputArchive {
+class Archive {
 public:
-	OutputArchive(ArchiveType* const derived) : _self(derived) { }
-	virtual ~OutputArchive() = default;
+	Archive(ArchiveType* const derived) : _self(derived) { }
+	virtual ~Archive() = default;
 
 	template<class ... Types> inline
 		void operator()(Types && ... args) {
@@ -47,35 +47,6 @@ private:
 		for (size_t i = 0; i < ar.size; ++i) {
 			Serialize(std::forward<T>(ar.pointer[i]));
 		}
-	}
-
-private:
-	ArchiveType* const _self;
-};
-
-template<class ArchiveType>
-class OutputArchive {
-public:
-	OutputArchive(ArchiveType* const derived) : _self(derived) { }
-	virtual ~OutputArchive() = default;
-
-	template<class ... Types> inline
-		void operator()(Types && ... args) {
-		(Deserialize(std::forward<Types>(args)), ...);
-	}
-
-private:
-	template<typename T>
-	void Serialize(T&& arg) {
-		Prologue(*_self, std::forward<T>(arg));
-		Process(std::forward<T>(arg));
-		Epilogue(*_self, std::forward<T>(arg));
-	}
-
-	template <typename T, typename std::enable_if_t<!is_serializable_v<T>, int> = 0>
-	void Process(T&& arg) {
-		std::cout << "Processing Default" << std::endl;
-		_self->ProcessImpl(std::forward<T>(arg));
 	}
 
 private:

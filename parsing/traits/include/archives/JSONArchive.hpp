@@ -27,10 +27,10 @@ struct StackContext {
 	}
 };
 
-class JSONOutputArchive : public OutputArchive<JSONOutputArchive> {
+class JSONOutputArchive : public Archive<JSONOutputArchive> {
 public:
 	JSONOutputArchive(std::ostream& stream) : 
-		OutputArchive<JSONOutputArchive>(this),
+		Archive<JSONOutputArchive>(this),
 		_stream(stream) 
 	{ 
 		_contextStack.push(StackContext::Context::Object);
@@ -83,20 +83,59 @@ private:
 };
 
 
-class JSONOutputArchive : public OutputArchive<JSONOutputArchive> {
+class JSONInputArchive : public Archive<JSONInputArchive> {
 public:
-	JSONOutputArchive(std::istream& stream) :
-		OutputArchive<JSONOutputArchive>(this)
+	JSONInputArchive(std::istream& stream) :
+		Archive<JSONInputArchive>(this)
 	{
 		_contextStack.push(StackContext::Context::Object);
 		_contextStack.top().document = nlohmann::json::parse(stream);
 	};
 
+	template<typename T>
+	void ProcessImpl(T&& data) {
+		if (TopStack().context == StackContext::Context::Array) {
+			data = TopStack().document.at(TopStack().unnamedIndex++);
+		}
+		else
+			data = TopStack().document.at(TopStack().GetNextName());
+	}
+
+	void SetNextName(const char* name) {
+		TopStack().name = name;
+	}
+
+	void OpenArray() {
+		StackContext context = TopStack();
+		_contextStack.push(StackContext::Context::Array);
+		TopStack().document = context.document.at(context.GetNextName());
+	}
+
+	void CloseArray() {
+		_contextStack.pop();
+	}
+
+	void OpenObject() {
+		StackContext context = TopStack();
+		_contextStack.push(StackContext::Context::Object);
+		TopStack().document = context.document.at(context.GetNextName());
+	}
+
+	void CloseObject() {
+		_contextStack.pop();
+	}
+
+private:
+	StackContext& TopStack() {
+		return _contextStack.top();
+	}
+
 private:
 	std::stack<StackContext> _contextStack;
 };
 
-
+// =======================================
+// OutputArchive
 // =======================================
 
 template<typename T>
@@ -148,4 +187,59 @@ template<typename T, typename std::enable_if_t<is_serializable_v<T>, int> = 0>
 void Epilogue(JSONOutputArchive& a, T const&) {
 	std::cout << "Epilogueing Serializable" << std::endl;
 	a.EndObject();
+}
+
+// =======================================
+// InputArchive
+// =======================================
+
+template<typename T>
+void Prologue(JSONInputArchive& a, ArrayRef<T>&& ar) {
+	std::cout << "Prologueing Array" << std::endl;
+	a.OpenArray();
+}
+
+template<typename T>
+void Epilogue(JSONInputArchive& a, ArrayRef<T>&& ar) {
+	std::cout << "Epilogueing Array" << std::endl;
+	a.CloseArray();
+}
+
+// =======================================
+
+template<typename T>
+void Prologue(JSONInputArchive& a, NVP<T>&& nvp) {
+	std::cout << "Prologueing NVP" << std::endl;
+	a.SetNextName(nvp.name);
+}
+
+template<typename T>
+void Epilogue(JSONInputArchive& a, NVP<T>&& nvp) {
+	std::cout << "Epilogueing NVP" << std::endl;
+}
+
+// =======================================
+
+template<typename T, typename std::enable_if_t<!is_serializable_v<T>, int> = 0>
+void Prologue(JSONInputArchive& a, T const&) {
+	std::cout << "Prologueing Something" << std::endl;
+}
+
+template<typename T, typename std::enable_if_t<!is_serializable_v<T>, int> = 0>
+void Epilogue(JSONInputArchive& a, T const&) {
+	std::cout << "Epilogueing Something" << std::endl;
+}
+
+// =======================================
+
+template<typename T, typename std::enable_if_t<is_serializable_v<T>, int> = 0>
+void Prologue(JSONInputArchive& a, T const&) {
+	std::cout << "Prologueing Serializable" << std::endl;
+	a.OpenObject();
+}
+
+template<typename T, typename std::enable_if_t<is_serializable_v<T>, int> = 0>
+void Epilogue(JSONInputArchive& a, T const&) {
+	std::cout << "Epilogueing Serializable" << std::endl;
+	a.CloseObject();
 }
