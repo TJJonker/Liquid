@@ -16,6 +16,8 @@ struct StackContext {
 
 	StackContext(Context context) : context(context), unnamedIndex(0), name(nullptr) { }
 
+	int GetNextUnnamedIndex() { return unnamedIndex++; }
+
 	std::string GetNextName() {
 		if (name != nullptr) {
 			const char* temp = name;
@@ -23,8 +25,12 @@ struct StackContext {
 			return temp;
 		}
 
-		return "unnamedVariable_" + std::to_string(unnamedIndex++);
+		return "unnamedVariable_" + std::to_string(GetNextUnnamedIndex());
 	}
+
+	nlohmann::ordered_json GetNextVariable() { return document[GetNextName()]; }
+
+	nlohmann::ordered_json GetNextArrayIndex() { return document[GetNextUnnamedIndex()]; }
 };
 
 class JSONOutputArchive : public Archive<JSONOutputArchive> {
@@ -45,32 +51,23 @@ public:
 		if (TopStack().context == StackContext::Context::Array)
 			TopStack().document.push_back(data);
 		else
-			TopStack().document[TopStack().GetNextName()] = data;
+			TopStack().GetNextVariable() = data;
 	}
 
 	void SetNextName(const char* name) {
 		TopStack().name = name;
 	}
 
-	void StartArray() {
-		_contextStack.push(StackContext::Context::Array);
+	void StartIndent(StackContext::Context ctx) {
+		_contextStack.push(ctx);
 	}
 
-	void EndArray() {
+	void EndIndent() {
 		StackContext context = TopStack();
 		_contextStack.pop();
 		ProcessImpl(context.document);
 	}
 
-	void StartObject() {
-		_contextStack.push(StackContext::Context::Object);
-	}
-
-	void EndObject() {
-		StackContext context = TopStack();
-		_contextStack.pop();
-		ProcessImpl(context.document);
-	}
 
 private:
 	StackContext& TopStack() {
@@ -94,42 +91,27 @@ public:
 
 	template<typename T>
 	void ProcessImpl(T&& data) {
-		if (TopStack().context == StackContext::Context::Array) {
-			data = TopStack().document.at(TopStack().unnamedIndex++);
-		}
+		if (TopStack().context == StackContext::Context::Array)
+			data = TopStack().GetNextArrayIndex();
 		else
-			data = TopStack().document.at(TopStack().GetNextName());
+			data = TopStack().GetNextVariable();
 	}
 
 	void SetNextName(const char* name) {
 		TopStack().name = name;
 	}
 
-	void OpenArray() {
+	void OpenIndent(StackContext::Context ctx) {
 		StackContext context = TopStack();
-		_contextStack.push(StackContext::Context::Array);
+		_contextStack.push(ctx);
 		if (context.context == StackContext::Context::Array) {
-			TopStack().document = context.document.at(TopStack().unnamedIndex++);
+			TopStack().document = context.document[TopStack().unnamedIndex++];
 		}
 		else
-			TopStack().document = context.document.at(context.GetNextName());
+			TopStack().document = context.GetNextVariable();
 	}
 
-	void CloseArray() {
-		_contextStack.pop();
-	}
-
-	void OpenObject() {
-		StackContext context = TopStack();
-		_contextStack.push(StackContext::Context::Object);
-		if (context.context == StackContext::Context::Array) {
-			TopStack().document = context.document.at(TopStack().unnamedIndex++);
-		}
-		else
-			TopStack().document = context.document.at(context.GetNextName());
-	}
-
-	void CloseObject() {
+	void CloseIndent() {
 		_contextStack.pop();
 	}
 
@@ -149,13 +131,13 @@ private:
 template<typename T>
 void Prologue(JSONOutputArchive& a, ArrayRef<T>&& ar) {
 	std::cout << "Prologueing Array" << std::endl;
-	a.StartArray();
+	a.StartIndent(StackContext::Context::Array);
 }
 
 template<typename T>
 void Epilogue(JSONOutputArchive& a, ArrayRef<T>&& ar) {
 	std::cout << "Epilogueing Array" << std::endl;
-	a.EndArray();
+	a.EndIndent();
 }
 
 // =======================================
@@ -188,13 +170,13 @@ void Epilogue(JSONOutputArchive& a, T const&) {
 template<typename T, typename std::enable_if_t<is_serializable_v<T>, int> = 0>
 void Prologue(JSONOutputArchive& a, T const&) {
 	std::cout << "Prologueing Serializable" << std::endl;
-	a.StartObject();
+	a.StartIndent(StackContext::Context::Object);
 }
 
 template<typename T, typename std::enable_if_t<is_serializable_v<T>, int> = 0>
 void Epilogue(JSONOutputArchive& a, T const&) {
 	std::cout << "Epilogueing Serializable" << std::endl;
-	a.EndObject();
+	a.EndIndent();
 }
 
 // =======================================
@@ -204,13 +186,13 @@ void Epilogue(JSONOutputArchive& a, T const&) {
 template<typename T>
 void Prologue(JSONInputArchive& a, ArrayRef<T>&& ar) {
 	std::cout << "Prologueing Array" << std::endl;
-	a.OpenArray();
+	a.OpenIndent(StackContext::Context::Array);
 }
 
 template<typename T>
 void Epilogue(JSONInputArchive& a, ArrayRef<T>&& ar) {
 	std::cout << "Epilogueing Array" << std::endl;
-	a.CloseArray();
+	a.CloseIndent();
 }
 
 // =======================================
@@ -243,11 +225,11 @@ void Epilogue(JSONInputArchive& a, T const&) {
 template<typename T, typename std::enable_if_t<is_serializable_v<T>, int> = 0>
 void Prologue(JSONInputArchive& a, T const&) {
 	std::cout << "Prologueing Serializable" << std::endl;
-	a.OpenObject();
+	a.OpenIndent(StackContext::Context::Object);
 }
 
 template<typename T, typename std::enable_if_t<is_serializable_v<T>, int> = 0>
 void Epilogue(JSONInputArchive& a, T const&) {
 	std::cout << "Epilogueing Serializable" << std::endl;
-	a.CloseObject();
+	a.CloseIndent();
 }
