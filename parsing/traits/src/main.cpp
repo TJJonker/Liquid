@@ -37,16 +37,26 @@ private:
 int vars[5];
 ExampleClass exampleClass[5];
 
+//int main() {
+//	std::ofstream os("temp/out.lb");
+//	{
+//		JSONOutputArchive archive(os);
+//
+//		archive(Liquid::Create_nvp("array", Liquid::Create_array(vars)));
+//		archive(Liquid::Create_nvp("ExampleClasses", Liquid::Create_array(exampleClass)));
+//	}
+//	os.close();
+//}
 
 int main() {
-	std::ifstream os("temp/out.lb");
+	std::ifstream is("temp/out.lb");
 	{
-		JSONInputArchive archive(os);
+		JSONInputArchive archive(is);
 
 		archive(Liquid::Create_nvp("array", Liquid::Create_array(vars)));
 		archive(Liquid::Create_nvp("ExampleClasses", Liquid::Create_array(exampleClass)));
 	}
-	os.close();
+	is.close();
 
 	std::cout << std::endl;
 	std::cout << vars[0] << std::endl;
