@@ -1,45 +1,45 @@
 {
     "array": [
-        1,
-        2,
-        3,
-        4,
-        5
+        0,
+        0,
+        0,
+        0,
+        0
     ],
     "ExampleClasses": [
         {
-            "Name": "Random classname",
+            "Name": "Ih ah",
             "Class": {
-                "x": 1,
-                "y": 42
+                "x": 0,
+                "y": 0
             }
         },
         {
-            "Name": "Random classname",
+            "Name": "",
             "Class": {
-                "x": 1,
-                "y": 42
+                "x": 0,
+                "y": 0
             }
         },
         {
-            "Name": "Random classname",
+            "Name": "",
             "Class": {
-                "x": 1,
-                "y": 42
+                "x": 0,
+                "y": 0
             }
         },
         {
-            "Name": "Random classname",
+            "Name": "",
             "Class": {
-                "x": 1,
-                "y": 42
+                "x": 0,
+                "y": 0
             }
         },
         {
-            "Name": "Random classname",
+            "Name": "",
             "Class": {
-                "x": 1,
-                "y": 42
+                "x": 0,
+                "y": 0
             }
         }
     ]

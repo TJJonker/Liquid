@@ -30,7 +30,7 @@ public:
 	std::string GetName() { return name; }
 
 private:
-	std::string name = "";
+	std::string name = "Something cool?";
 	ExampleNestedClass cla;
 };
 

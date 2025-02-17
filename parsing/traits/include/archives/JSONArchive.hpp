@@ -28,9 +28,9 @@ struct StackContext {
 		return "unnamedVariable_" + std::to_string(GetNextUnnamedIndex());
 	}
 
-	nlohmann::ordered_json GetNextVariable() { return document[GetNextName()]; }
+	nlohmann::ordered_json& GetNextVariable() { return document[GetNextName()]; }
 
-	nlohmann::ordered_json GetNextArrayIndex() { return document[GetNextUnnamedIndex()]; }
+	nlohmann::ordered_json& GetNextArrayIndex() { return document[GetNextUnnamedIndex()]; }
 };
 
 class JSONOutputArchive : public Archive<JSONOutputArchive> {
@@ -50,8 +50,9 @@ public:
 	void ProcessImpl(T&& data) {
 		if (TopStack().context == StackContext::Context::Array)
 			TopStack().document.push_back(data);
-		else
+		else {
 			TopStack().GetNextVariable() = data;
+		}
 	}
 
 	void SetNextName(const char* name) {
@@ -64,6 +65,7 @@ public:
 
 	void EndIndent() {
 		StackContext context = TopStack();
+		std::cout << context.document.dump(4) << std::endl;
 		_contextStack.pop();
 		ProcessImpl(context.document);
 	}
