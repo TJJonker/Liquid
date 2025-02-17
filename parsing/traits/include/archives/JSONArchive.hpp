@@ -108,7 +108,11 @@ public:
 	void OpenArray() {
 		StackContext context = TopStack();
 		_contextStack.push(StackContext::Context::Array);
-		TopStack().document = context.document.at(context.GetNextName());
+		if (context.context == StackContext::Context::Array) {
+			TopStack().document = context.document.at(TopStack().unnamedIndex++);
+		}
+		else
+			TopStack().document = context.document.at(context.GetNextName());
 	}
 
 	void CloseArray() {
@@ -118,7 +122,11 @@ public:
 	void OpenObject() {
 		StackContext context = TopStack();
 		_contextStack.push(StackContext::Context::Object);
-		TopStack().document = context.document.at(context.GetNextName());
+		if (context.context == StackContext::Context::Array) {
+			TopStack().document = context.document.at(TopStack().unnamedIndex++);
+		}
+		else
+			TopStack().document = context.document.at(context.GetNextName());
 	}
 
 	void CloseObject() {

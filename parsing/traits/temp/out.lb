@@ -1,7 +1,46 @@
 {
-    "unnamedVariable_0": [
-        0,
-        10,
-        42
+    "array": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ],
+    "ExampleClasses": [
+        {
+            "Name": "Random classname",
+            "Class": {
+                "x": 1,
+                "y": 42
+            }
+        },
+        {
+            "Name": "Random classname",
+            "Class": {
+                "x": 1,
+                "y": 42
+            }
+        },
+        {
+            "Name": "Random classname",
+            "Class": {
+                "x": 1,
+                "y": 42
+            }
+        },
+        {
+            "Name": "Random classname",
+            "Class": {
+                "x": 1,
+                "y": 42
+            }
+        },
+        {
+            "Name": "Random classname",
+            "Class": {
+                "x": 1,
+                "y": 42
+            }
+        }
     ]
 }
