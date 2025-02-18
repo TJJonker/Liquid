@@ -1,13 +1,16 @@
 #pragma once
 
-template<typename T>
-struct NVP {
-	const char* name;
-	T& value;
-};
+namespace Liquid {
 
-template<typename T>
-struct ArrayRef {
-	T* pointer;
-	size_t size;
-};
+	template<typename T>
+	struct NVP {
+		const char* name;
+		T& value;
+	};
+
+	template<typename T>
+	struct ArrayRef {
+		T* pointer;
+		size_t size;
+	};
+}

@@ -1,8 +1,7 @@
-#include "macros.h"
-#include "structs.h"
+#include <liquid/structs.h>
+#include <liquid/archives/JSONArchive.hpp>
 
-class Liquid {
-public:
+namespace Liquid {
 	template <class T>
 	static inline NVP<T> Create_nvp(const char* name, T& value) {
 		return { name, value };
@@ -12,4 +11,4 @@ public:
 	static inline ArrayRef<T> Create_array(T(&ar)[N]) {
 		return { ar, N };
 	}
-};
+}
