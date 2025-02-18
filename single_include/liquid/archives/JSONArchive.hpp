@@ -37,7 +37,7 @@ namespace Liquid {
 				return temp;
 			}
 
-			return "unnamedVariable_" + std::to_string(GetNextUnnamedIndex());
+			return "_" + std::to_string(GetNextUnnamedIndex());
 		}
 
 		/// <summary>
