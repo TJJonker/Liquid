@@ -1,8 +1,11 @@
 #pragma once
 #include <liquid/archives/archive.hpp>
 #include <nlohmann/json.hpp>
-#include <stack>
+#include <stack> 
 
+/// <summary>
+/// Context of the indentation stack.
+/// </summary>
 struct StackContext {
 	enum class Context {
 		Array,
@@ -16,8 +19,16 @@ struct StackContext {
 
 	StackContext(Context context) : context(context), unnamedIndex(0), name(nullptr) { }
 
+	/// <summary>
+	/// Fetches and increases the current unnamed index value.
+	/// </summary>
+	/// <returns>The current unnamed index value.</returns>
 	int GetNextUnnamedIndex() { return unnamedIndex++; }
 
+	/// <summary>
+	/// Returns the currently set name, or a substitue based on an unnamed index value.
+	/// </summary>
+	/// <returns>The currently set name, or a substitue based on an unnamed index value.</returns>
 	std::string GetNextName() {
 		if (name != nullptr) {
 			const char* temp = name;
@@ -28,11 +39,22 @@ struct StackContext {
 		return "unnamedVariable_" + std::to_string(GetNextUnnamedIndex());
 	}
 
+	/// <summary>
+	/// Retrieves the next variable in the current object, based on the next name in the context.
+	/// </summary>
+	/// <returns>The next variable in the current object</returns>
 	nlohmann::ordered_json& GetNextVariable() { return document[GetNextName()]; }
 
+	/// <summary>
+	/// Retrieves the next index in the current array.
+	/// </summary>
+	/// <returns>The next index in the current array</returns>
 	nlohmann::ordered_json& GetNextArrayIndex() { return document[GetNextUnnamedIndex()]; }
 };
 
+/// <summary>
+/// Archive that outputs serialized data into JSON formatted files.
+/// </summary>
 class JSONOutputArchive : public Archive<JSONOutputArchive> {
 public:
 	JSONOutputArchive(std::ostream& stream) : 
@@ -55,17 +77,23 @@ public:
 		}
 	}
 
-	void SetNextName(const char* name) {
-		TopStack().name = name;
-	}
+	/// <summary>
+	/// Sets next name in the context list.
+	/// </summary>
+	/// <param name="name">Next name entry</param>
+	void SetNextName(const char* name) { TopStack().name = name; }
 
-	void StartIndent(StackContext::Context ctx) {
-		_contextStack.push(ctx);
-	}
+	/// <summary>
+	/// Starts an indent with the corresponding context.
+	/// </summary>
+	/// <param name="ctx">Context for the indent.</param>
+	void StartIndent(StackContext::Context ctx) { _contextStack.push(ctx); }
 
+	/// <summary>
+	/// End the current indent.
+	/// </summary>
 	void EndIndent() {
 		StackContext context = TopStack();
-		std::cout << context.document.dump(4) << std::endl;
 		_contextStack.pop();
 		ProcessImpl(context.document);
 	}
@@ -81,7 +109,9 @@ private:
 	std::stack<StackContext> _contextStack;
 };
 
-
+/// <summary>
+/// Archive that inputs JSON formatted files into serialized data.
+/// </summary>
 class JSONInputArchive : public Archive<JSONInputArchive> {
 public:
 	JSONInputArchive(std::istream& stream) :
@@ -99,10 +129,18 @@ public:
 			data = TopStack().GetNextVariable();
 	}
 
+	/// <summary>
+	/// Sets next name in the context list.
+	/// </summary>
+	/// <param name="name">Next name entry</param>
 	void SetNextName(const char* name) {
 		TopStack().name = name;
 	}
 
+	/// <summary>
+	/// Opens an indent with the corresponding context.
+	/// </summary>
+	/// <param name="ctx">Context for the indent.</param>
 	void OpenIndent(StackContext::Context ctx) {
 		StackContext context = TopStack();
 		_contextStack.push(ctx);
@@ -113,6 +151,9 @@ public:
 			TopStack().document = context.GetNextVariable();
 	}
 
+	/// <summary>
+	/// Closes the current indent.
+	/// </summary>
 	void CloseIndent() {
 		_contextStack.pop();
 	}
