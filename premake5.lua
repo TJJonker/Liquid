@@ -1,20 +1,22 @@
-workspace "TestEnvironment"
-	architecture "x64"
-	startproject "parsing_traits" 
+project "Liquid"
+	kind "StaticLib"
+	language "C++"
 
-	configurations {
-		"Debug",
-		"Release",
+	targetdir (solutionDir .. "/bin/" .. outputdir .. "/%{prj.name}")
+	objdir (solutionDir .. "/bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files {
+		"include/**.h",
+		"include/**.hpp",
 	}
 
-solutionDir = "%{wks.location}/"
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+	filter "system:windows"
+		cppdialect "C++17"
+		systemversion "latest"
+		staticruntime "on"
 
-includeDirs = {}
-includeDirs["NLOHMANN"] = "vendor/NLOHMANN/single_include"
+	filter "configurations:Debug"
+		symbols "On"
 
-libraryDirs = {}
-
-include "parsing/interface"
-include "parsing/traits"
-include "tests/traits"
+	filter "configurations:Release"
+		optimize "On"
