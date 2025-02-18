@@ -1,5 +1,6 @@
 #include <liquid/structs.h>
 #include <liquid/archives/JSONArchive.hpp>
+#include <liquid/archives/BinaryArchive.hpp>
 
 namespace Liquid {
 	template <class T>
