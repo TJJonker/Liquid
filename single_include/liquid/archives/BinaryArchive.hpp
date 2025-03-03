@@ -3,10 +3,10 @@
 #include <liquid/archives/archive.hpp>
 
 namespace Liquid {
-	class BinaryOutputArchive : public Archive<BinaryOutputArchive> {
+	class BinaryOutputArchive : public OutputArchive<BinaryOutputArchive> {
 	public:
 		BinaryOutputArchive(std::ostream& stream) :
-			Archive<BinaryOutputArchive>(this), _stream(stream) { }
+			OutputArchive<BinaryOutputArchive>(this), _stream(stream) { }
 
 		~BinaryOutputArchive() { }
 
@@ -18,10 +18,10 @@ namespace Liquid {
 		std::ostream& _stream;
 	};
 
-	class BinaryInputArchive : public Archive<BinaryInputArchive> {
+	class BinaryInputArchive : public OutputArchive<BinaryInputArchive> {
 	public:
 		BinaryInputArchive(std::istream& stream) :
-			Archive<BinaryInputArchive>(this), _stream(stream) { }
+			OutputArchive<BinaryInputArchive>(this), _stream(stream) { }
 
 		~BinaryInputArchive() { }
 

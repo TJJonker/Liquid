@@ -56,10 +56,10 @@ namespace Liquid {
 	/// <summary>
 	/// Archive that outputs serialized data into JSON formatted files.
 	/// </summary>
-	class JSONOutputArchive : public Archive<JSONOutputArchive> {
+	class JSONOutputArchive : public OutputArchive<JSONOutputArchive> {
 	public:
 		JSONOutputArchive(std::ostream& stream) :
-			Archive<JSONOutputArchive>(this),
+			OutputArchive<JSONOutputArchive>(this),
 			_stream(stream)
 		{
 			_contextStack.push(StackContext::Context::Object);
@@ -113,10 +113,10 @@ namespace Liquid {
 	/// <summary>
 	/// Archive that inputs JSON formatted files into serialized data.
 	/// </summary>
-	class JSONInputArchive : public Archive<JSONInputArchive> {
+	class JSONInputArchive : public OutputArchive<JSONInputArchive> {
 	public:
 		JSONInputArchive(std::istream& stream) :
-			Archive<JSONInputArchive>(this)
+			OutputArchive<JSONInputArchive>(this)
 		{
 			_contextStack.push(StackContext::Context::Object);
 			_contextStack.top().document = nlohmann::json::parse(stream);
