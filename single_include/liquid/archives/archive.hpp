@@ -20,9 +20,9 @@ namespace Liquid {
 	private:
 		template<typename T>
 		void Process(T&& arg) {
-			//Prologue(*_self, std::forward<T>(arg));
-			ProcessImpl(std::forward<T>(arg));
-			//Epilogue(*_self, std::forward<T>(arg));
+			Prologue(*_self, std::forward<T>(arg));
+			ProcessImpl(arg);
+			Epilogue(*_self, std::forward<T>(arg));
 		}
 
 #define ENABLE_IF(name)														\
@@ -35,14 +35,15 @@ namespace Liquid {
 		//	std::cout << "Processing member serialization" << std::endl;
 		//}
 
-		//template<typename T, ENABLE_IF(serialize_archive)>
-		//void ProcessImpl(T&& arg) {
-		//	std::cout << "Processing archive serialization" << std::endl;
-		//}
+		template<typename T, ENABLE_IF(archive_serialize)>
+		void ProcessImpl(T&& arg) {
+			std::cout << "Processing archive serialization" << std::endl;
+			serialize(*_self, arg);
+		}
 
 		template<typename T, ENABLE_IF(archive_save)>
 		void ProcessImpl(T&& arg) {
-			Save(*_self, arg);
+			save(*_self, arg);
 		}
 
 		//template<typename T>
@@ -53,5 +54,17 @@ namespace Liquid {
 	private:
 		Archive* const _self;
 	};
-}
+
+	template<class Archive, typename T>
+	void epilogue(Archive&, T&) {
+		std::cout << "No epilogue found" << std::endl;
+	}
+
+	template<class Archive, typename T>
+	void prologue(Archive&, T&) {
+		std::cout << "No prologue found" << std::endl;
+	}
+
+
 #undef ENABLE_IF
+}

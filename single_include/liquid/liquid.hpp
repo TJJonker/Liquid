@@ -8,8 +8,8 @@ namespace Liquid {
 		return { name, value };
 	}
 
-	template<typename T, size_t N>
-	static inline ArrayRef<T> Create_array(T(&ar)[N]) {
-		return { ar, N };
-	}
+	//template<typename T, size_t N>
+	//static inline ArrayRef<T> Create_array(T(&ar)[N]) {
+	//	return { ar, N };
+	//}
 }

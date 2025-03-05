@@ -172,92 +172,29 @@ namespace Liquid {
 
 	template<typename T>
 	std::enable_if_t<std::is_arithmetic_v<T>>
-	Save(JSONOutputArchive& archive, T& t) {
+	save(JSONOutputArchive& archive, T& t) {
 		archive.SaveData(t);
-		std::cout << "JSON Arithmetic" << std::endl;
+	}
+
+	template<typename T>
+	std::enable_if_t<std::is_array_v<T>>
+	serialize(JSONOutputArchive& ar, T& t) {
+		for(auto const& i : t)
+			ar(i);
 	}
 
 #pragma region OutputArchive
-	// =======================================
-	// OutputArchive
-	// =======================================
-
 	template<typename T>
-	void Prologue(JSONOutputArchive& a, ArrayRef<T>&& ar) {
-		std::cout << "Prologueing Array" << std::endl;
+	std::enable_if_t<std::is_array_v<T>>
+	prologue(JSONOutputArchive& a, T&) {
 		a.StartIndent(StackContext::Context::Array);
 	}
 
 	template<typename T>
-	void Epilogue(JSONOutputArchive& a, ArrayRef<T>&& ar) {
-		std::cout << "Epilogueing Array" << std::endl;
-		a.EndIndent();
-	}
-
-	// =======================================
-
-	template<typename T>
-	void Prologue(JSONOutputArchive& a, NVP<T>&& nvp) {
-		std::cout << "Prologueing NVP" << std::endl;
-		a.SetNextName(nvp.name);
-	}
-
-	// =======================================
-
-	template<typename T, typename std::enable_if_t<traits::is_serializable_v<T>, int> = 0>
-	void Prologue(JSONOutputArchive& a, T const&) {
-		std::cout << "Prologueing Serializable" << std::endl;
-		a.StartIndent(StackContext::Context::Object);
-	}
-
-	template<typename T, typename std::enable_if_t<traits::is_serializable_v<T>, int> = 0>
-	void Epilogue(JSONOutputArchive& a, T const&) {
-		std::cout << "Epilogueing Serializable" << std::endl;
+	std::enable_if_t<std::is_array_v<T>>
+	epilogue(JSONOutputArchive& a, T& ar) {
 		a.EndIndent();
 	}
 #pragma endregion
 
-#ifdef DISABLE
-
-
-#pragma region InputArchive
-	// =======================================
-	// InputArchive
-	// =======================================
-
-	template<typename T>
-	void Prologue(JSONInputArchive& a, ArrayRef<T>&& ar) {
-		std::cout << "Prologueing Array" << std::endl;
-		a.OpenIndent(StackContext::Context::Array);
-	}
-
-	template<typename T>
-	void Epilogue(JSONInputArchive& a, ArrayRef<T>&& ar) {
-		std::cout << "Epilogueing Array" << std::endl;
-		a.CloseIndent();
-	}
-
-	// =======================================
-
-	template<typename T>
-	void Prologue(JSONInputArchive& a, NVP<T>&& nvp) {
-		std::cout << "Prologueing NVP" << std::endl;
-		a.SetNextName(nvp.name);
-	}
-
-	// =======================================
-
-	template<typename T, typename std::enable_if_t<traits::is_serializable_v<T>, int> = 0>
-	void Prologue(JSONInputArchive& a, T const&) {
-		std::cout << "Prologueing Serializable" << std::endl;
-		a.OpenIndent(StackContext::Context::Object);
-	}
-
-	template<typename T, typename std::enable_if_t<traits::is_serializable_v<T>, int> = 0>
-	void Epilogue(JSONInputArchive& a, T const&) {
-		std::cout << "Epilogueing Serializable" << std::endl;
-		a.CloseIndent();
-	}
-#pragma endregion
-#endif // DISABLE
 }

@@ -35,7 +35,7 @@ namespace Liquid {
 
 	template<typename T>
 	std::enable_if_t<std::is_arithmetic_v<T>>
-	Save(BinaryOutputArchive& a, T& t) {
+	save(BinaryOutputArchive& a, T& t) {
 		std::cout << "Saving a arithmetic value!" << std::endl;
 	}
 }

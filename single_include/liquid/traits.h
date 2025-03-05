@@ -21,19 +21,25 @@ namespace Liquid::traits {
 
 #pragma endregion
 
-    #define LIQUID_MAKE_MEMBER_TEST(functionName)                                                                               \
+    #define LIQUID_MAKE_ARCHIVE_TEST(functionName)                                                                               \
     namespace detail {                                                                                                          \
         template<class T, class A>                                                                                              \
         struct has_archive_##functionName##_impl {                                                                              \
         template <class TT, class AA>                                                                                           \
-        static auto test(int) -> decltype(Save(std::declval<AA&>(), std::declval<TT&>()), yes());                               \
+        static auto test(int) -> decltype(##functionName(std::declval<AA&>(), std::declval<TT&>()), yes());                               \
         template<class, class>                                                                                                  \
         static no test(...);                                                                                                    \
         static const bool value = decltype(test<T, A>(0))::value;                                                               \
         };                                                                                                                      \
     }                                                                                                                           \
     template<class T, class A>                                                                                                  \
-    struct has_archive_save : std::integral_constant<bool, detail::has_archive_save_impl<T, A>::value> {};
+    struct has_archive_##functionName : std::integral_constant<bool, detail::has_archive_##functionName##_impl<T, A>::value> {};
 
-    LIQUID_MAKE_MEMBER_TEST(save);
+    LIQUID_MAKE_ARCHIVE_TEST(save);
+
+    LIQUID_MAKE_ARCHIVE_TEST(serialize);
+
+    LIQUID_MAKE_ARCHIVE_TEST(prologue);
+
+    LIQUID_MAKE_ARCHIVE_TEST(epilogue);
 }
