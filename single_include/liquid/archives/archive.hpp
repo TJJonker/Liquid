@@ -42,7 +42,7 @@ namespace Liquid {
 
 		template<typename T, ENABLE_IF(archive_save)>
 		void ProcessImpl(T&& arg) {
-			std::cout << "Processing archive saving" << std::endl;
+			Save(_self, arg);
 		}
 
 		//template<typename T>

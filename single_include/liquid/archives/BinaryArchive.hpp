@@ -34,7 +34,7 @@ namespace Liquid {
 	//};
 
 	template<typename Archive, typename T>
-	void
+	std::enable_if_t<std::is_arithmetic_v<T>>
 		Save(Archive& a, T& t) {
 		std::cout << "Saving a arithmetic value!" << std::endl;
 	}
