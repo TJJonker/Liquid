@@ -173,6 +173,7 @@ namespace Liquid {
 	template<typename T>
 	std::enable_if_t<std::is_arithmetic_v<T>>
 	Save(JSONOutputArchive& archive, T& t) {
+		archive.SaveData(t);
 		std::cout << "JSON Arithmetic" << std::endl;
 	}
 
