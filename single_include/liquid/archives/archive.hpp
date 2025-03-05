@@ -25,7 +25,7 @@ namespace Liquid {
 			//Epilogue(*_self, std::forward<T>(arg));
 		}
 
-#define ENABLE_IF(name)\
+#define ENABLE_IF(name)														\
 		std::enable_if_t<traits::has_##name<T, Archive>::value, int> = 0
 
 		// Check if archive contains the function
@@ -42,7 +42,7 @@ namespace Liquid {
 
 		template<typename T, ENABLE_IF(archive_save)>
 		void ProcessImpl(T&& arg) {
-			Save(_self, arg);
+			Save(*_self, arg);
 		}
 
 		//template<typename T>

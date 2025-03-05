@@ -24,7 +24,7 @@ namespace Liquid::traits {
     #define LIQUID_MAKE_MEMBER_TEST(functionName)                                                                               \
     namespace detail {                                                                                                          \
         template<class T, class A>                                                                                              \
-        struct has_archive_##functionName##_impl {                                                                               \
+        struct has_archive_##functionName##_impl {                                                                              \
         template <class TT, class AA>                                                                                           \
         static auto test(int) -> decltype(Save(std::declval<AA&>(), std::declval<TT&>()), yes());                               \
         template<class, class>                                                                                                  \

@@ -33,9 +33,9 @@ namespace Liquid {
 	//	std::istream& _stream;
 	//};
 
-	template<typename Archive, typename T>
+	template<typename T>
 	std::enable_if_t<std::is_arithmetic_v<T>>
-		Save(Archive& a, T& t) {
+	Save(BinaryOutputArchive& a, T& t) {
 		std::cout << "Saving a arithmetic value!" << std::endl;
 	}
 }
